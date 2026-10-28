@@ -120,9 +120,14 @@ const SuccessPage: React.FC = () => {
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-cerulean/15 text-cerulean border border-cerulean/30">
                     <span>✦</span> Final-Year Engineer
                   </span>
-                  {state?.isDemo && (
+                  {state?.isDemo ? (
                     <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-mono text-rose bg-rose/10 border border-rose/30">
                       SESSION DEMO
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      LIVE DATABASE VERIFIED
                     </span>
                   )}
                 </div>

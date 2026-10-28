@@ -15,11 +15,13 @@ import {
   captureAndStoreReferralCode,
 } from '../lib/referral';
 import { trackEvent } from '../lib/analytics';
+import { isSupabaseConfigured } from '../lib/supabase';
 import DemoBanner from '../components/DemoBanner';
 
 const RegistrationPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const isConfigured = isSupabaseConfigured();
 
   // Capture referral code from URL or persisted session
   useEffect(() => {
@@ -99,7 +101,19 @@ const RegistrationPage: React.FC = () => {
 
   return (
     <main className="pt-20 min-h-screen bg-black px-5 sm:px-8 pb-20" id="main-content">
-      <DemoBanner />
+      {!isConfigured && <DemoBanner />}
+      {isConfigured && (
+        <div
+          className="w-full bg-emerald-500/10 border-b border-emerald-500/20 px-4 py-2 text-center"
+          role="status"
+          aria-label="Live database connected notice"
+        >
+          <p className="text-xs text-emerald-400 font-mono flex items-center justify-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-semibold">LIVE DATABASE</span> — Connected to Supabase backend
+          </p>
+        </div>
+      )}
 
       <div className="max-w-md mx-auto mt-6">
         {/* Header Row: NxtWave & Back link */}

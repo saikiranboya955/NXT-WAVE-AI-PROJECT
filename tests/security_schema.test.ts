@@ -87,4 +87,28 @@ describe('Security & Database Schema Audit', () => {
     const gitignore = fs.readFileSync(gitignorePath, 'utf8');
     assert.ok(gitignore.includes('.env'), '.gitignore must exclude .env');
   });
+
+  it('verifies vercel.json exists and configures SPA routing rewrites', () => {
+    const vercelConfigPath = path.join(rootDir, 'vercel.json');
+    assert.ok(fs.existsSync(vercelConfigPath), 'vercel.json must exist');
+    const config = JSON.parse(fs.readFileSync(vercelConfigPath, 'utf8'));
+    assert.ok(Array.isArray(config.rewrites), 'rewrites array must exist');
+    assert.strictEqual(config.rewrites[0]?.source, '/(.*)');
+    assert.strictEqual(config.rewrites[0]?.destination, '/index.html');
+  });
+
+  it('verifies DemoBanner and RegistrationPage guard against showing demo banner when configured', () => {
+    const demoBannerPath = path.join(rootDir, 'src', 'components', 'DemoBanner.tsx');
+    const regPagePath = path.join(rootDir, 'src', 'pages', 'RegistrationPage.tsx');
+    assert.ok(fs.existsSync(demoBannerPath));
+    assert.ok(fs.existsSync(regPagePath));
+
+    const bannerCode = fs.readFileSync(demoBannerPath, 'utf8');
+    assert.ok(bannerCode.includes('isSupabaseConfigured'), 'DemoBanner must check isSupabaseConfigured');
+    assert.ok(bannerCode.includes('return null'), 'DemoBanner must return null when live configured');
+
+    const regPageCode = fs.readFileSync(regPagePath, 'utf8');
+    assert.ok(regPageCode.includes('!isConfigured && <DemoBanner />'), 'RegistrationPage must guard DemoBanner');
+  });
 });
+
