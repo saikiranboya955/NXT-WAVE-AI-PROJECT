@@ -106,11 +106,11 @@ const RegistrationPage: React.FC = () => {
         <div className="flex items-center justify-between mb-8">
           <Link to="/" className="flex items-center group" aria-label="NxtWave Home">
             <img
-              src="/nxtwave-logo.png"
+              src="/nxtwave-logo-white.png"
               alt="NxtWave"
-              className="h-7 w-auto object-contain filter drop-shadow-[0_0_1px_rgba(255,255,255,0.45)] group-hover:opacity-90 transition-opacity"
-              width="60"
-              height="31"
+              className="h-9 sm:h-10 w-auto object-contain filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] group-hover:opacity-90 transition-opacity"
+              width="80"
+              height="41"
             />
           </Link>
           <button

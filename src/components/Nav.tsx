@@ -13,11 +13,11 @@ const Nav: React.FC = () => {
         {/* Brand Logo */}
         <Link to="/" className="flex items-center group py-1" aria-label="NxtWave Home">
           <img
-            src="/nxtwave-logo.png"
+            src="/nxtwave-logo-white.png"
             alt="NxtWave"
-            className="h-8 sm:h-9 w-auto object-contain filter drop-shadow-[0_0_1px_rgba(255,255,255,0.45)] group-hover:opacity-90 transition-opacity"
-            width="70"
-            height="36"
+            className="h-9 sm:h-10 md:h-11 w-auto object-contain filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] group-hover:opacity-90 transition-opacity"
+            width="85"
+            height="44"
           />
         </Link>
 

@@ -1,9 +1,29 @@
 import { createClient, type SupabaseClient, type User } from '@supabase/supabase-js';
 
-// Environment variables
-const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL as string | undefined) || 'https://gxypassgopsemcyjnppq.supabase.co';
-const supabaseAnonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY ||
-  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY) as string | undefined;
+// Environment variables: inspect both VITE_SUPABASE_PUBLISHABLE_KEY and VITE_SUPABASE_ANON_KEY
+function resolveSupabaseKey(): string | undefined {
+  const pubKey = (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined)?.trim();
+  const anonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined)?.trim();
+
+  const isReal = (k: string | undefined): boolean => {
+    if (!k) return false;
+    return (
+      k.length > 20 &&
+      !k.includes('your-public-anon-key') &&
+      !k.includes('your-anon-key-here') &&
+      !k.includes('placeholder')
+    );
+  };
+
+  if (isReal(pubKey)) return pubKey;
+  if (isReal(anonKey)) return anonKey;
+  return pubKey || anonKey || undefined;
+}
+
+const supabaseUrl =
+  (import.meta.env.VITE_SUPABASE_URL as string | undefined)?.trim() ||
+  'https://gxypassgopsemcyjnppq.supabase.co';
+const supabaseAnonKey = resolveSupabaseKey();
 
 /**
  * Validates whether Supabase is configured with real credentials
@@ -14,7 +34,8 @@ export function isSupabaseConfigured(): boolean {
   if (
     supabaseUrl.includes('your-project') ||
     supabaseUrl.includes('example.supabase.co') ||
-    supabaseAnonKey.includes('your-public-anon-key')
+    supabaseAnonKey.includes('your-public-anon-key') ||
+    supabaseAnonKey.includes('placeholder')
   ) {
     return false;
   }

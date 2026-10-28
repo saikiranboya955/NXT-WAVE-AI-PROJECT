@@ -92,11 +92,11 @@ const SuccessPage: React.FC = () => {
               AI PROJECT PASSPORT
             </span>
             <img
-              src="/nxtwave-logo.png"
+              src="/nxtwave-logo-white.png"
               alt="NxtWave"
-              className="h-6 w-auto object-contain filter drop-shadow-[0_0_1px_rgba(255,255,255,0.45)]"
-              width="52"
-              height="27"
+              className="h-8 sm:h-9 w-auto object-contain filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+              width="72"
+              height="37"
             />
           </div>
 

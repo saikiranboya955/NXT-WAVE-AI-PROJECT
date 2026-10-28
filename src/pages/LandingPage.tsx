@@ -119,19 +119,19 @@ const LandingPage: React.FC = () => {
 
             {/* Right Hero Image Column with Young Person & Laptop */}
             <div className="relative flex justify-center lg:justify-end">
-              {/* Floating Annotation: Real Project in 60 Mins! */}
-              <div
-                className="absolute -top-3 left-4 sm:-left-3 z-20 bg-surface-elevated/95 backdrop-blur-sm border border-cerulean/40 px-3.5 py-1.5 rounded-full -rotate-3 hidden sm:flex items-center gap-2"
-                aria-hidden="true"
-              >
-                <span className="text-cerulean text-xs">✨</span>
-                <span className="text-xs font-bold text-cerulean tracking-wide">
-                  Real Project in 60 Mins!
-                </span>
-              </div>
-
               {/* Hero Image Container */}
               <div className="relative max-w-md w-full">
+                {/* Floating Annotation: Real Project in 60 Mins! (Straightened horizontal badge) */}
+                <div
+                  className="absolute top-4 left-4 z-20 bg-surface-elevated/95 backdrop-blur-sm border border-cerulean/50 px-3.5 py-1.5 rounded-full flex items-center gap-2 shadow-[0_2px_12px_rgba(0,123,167,0.25)]"
+                  aria-hidden="true"
+                >
+                  <span className="text-cerulean text-xs">✨</span>
+                  <span className="text-xs font-bold text-white tracking-wide">
+                    Real Project in 60 Mins!
+                  </span>
+                </div>
+
                 <div className="relative rounded-2xl overflow-hidden border border-border bg-surface shadow-xl">
                   <img
                     src="/hero-person.jpg"

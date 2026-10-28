@@ -205,11 +205,11 @@ const DashboardPage: React.FC = () => {
             <div className="px-3">
               <Link to="/" className="inline-block" aria-label="NxtWave Home">
                 <img
-                  src="/nxtwave-logo.png"
+                  src="/nxtwave-logo-white.png"
                   alt="NxtWave"
-                  className="h-7 w-auto object-contain filter drop-shadow-[0_0_1px_rgba(255,255,255,0.45)]"
-                  width="60"
-                  height="31"
+                  className="h-9 sm:h-10 w-auto object-contain filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+                  width="80"
+                  height="41"
                 />
               </Link>
               <div className="flex items-center gap-1.5 mt-2">
