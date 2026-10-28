@@ -10,6 +10,8 @@ import {
 import { getProjectById } from '../lib/recommendation';
 import { trackEvent } from '../lib/analytics';
 
+import type { EmailDeliveryStatus } from '../lib/email';
+
 interface SuccessState {
   name: string;
   referralCode: string;
@@ -17,6 +19,8 @@ interface SuccessState {
   registration: Registration;
   alreadyRegistered?: boolean;
   isDemo?: boolean;
+  emailStatus?: EmailDeliveryStatus;
+  emailMessage?: string;
 }
 
 const SuccessPage: React.FC = () => {
@@ -69,7 +73,7 @@ const SuccessPage: React.FC = () => {
     <main className="pt-20 min-h-screen bg-black px-5 sm:px-8 pb-20" id="main-content">
       <div className="max-w-lg mx-auto">
         {/* Top Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <div className="inline-flex items-center justify-center text-3xl mb-3 animate-bounce">
             🎉
           </div>
@@ -83,6 +87,26 @@ const SuccessPage: React.FC = () => {
             Invite classmates from your college to build together.
           </p>
         </div>
+
+        {/* ─── Email Confirmation Status Pill ──────────────────────────────── */}
+        {state?.emailStatus === 'sent' && (
+          <div className="mb-6 p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs flex items-center gap-2.5">
+            <span className="text-sm">✉️</span>
+            <span>A confirmation email with workshop preparation details has been sent to your registered address.</span>
+          </div>
+        )}
+        {state?.emailStatus === 'skipped_duplicate' && (
+          <div className="mb-6 p-3.5 rounded-xl bg-cerulean/10 border border-cerulean/30 text-cerulean text-xs flex items-center gap-2.5">
+            <span className="text-sm">ℹ️</span>
+            <span>Your seat is already confirmed. Check your inbox for previous instructions.</span>
+          </div>
+        )}
+        {(state?.emailStatus === 'unconfigured' || state?.emailStatus === 'pending') && !state?.isDemo && (
+          <div className="mb-6 p-3.5 rounded-xl bg-surface-elevated border border-border text-text-secondary text-xs flex items-center gap-2.5">
+            <span className="text-sm">ℹ️</span>
+            <span>Seat recorded in central database. Joining links and starter instructions will be delivered before the session.</span>
+          </div>
+        )}
 
         {/* ─── The AI Project Passport Card (Section 5) ───────────────────── */}
         <div className="relative rounded-2xl p-6 sm:p-7 bg-surface border border-cerulean/30 shadow-xl mb-8 overflow-hidden">

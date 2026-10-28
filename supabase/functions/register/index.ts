@@ -107,10 +107,35 @@ serve(async (req: Request) => {
       );
     }
 
+    let emailStatus = data?.already_registered ? "skipped_duplicate" : "unconfigured";
+
+    // 5. Send confirmation email for newly confirmed registrations
+    if (data?.success && !data?.already_registered && data?.registration_id) {
+      try {
+        const { data: emailRes } = await supabase.functions.invoke("send-confirmation-email", {
+          body: {
+            registrationId: data.registration_id,
+            name,
+            email,
+            college,
+            graduationYear,
+            projectId,
+            alreadyRegistered: false,
+          },
+        });
+        if (emailRes?.emailStatus) {
+          emailStatus = emailRes.emailStatus;
+        }
+      } catch {
+        // Safe fallback: never fail registration if email fails
+        emailStatus = "pending";
+      }
+    }
+
     const statusCode = data?.already_registered ? 200 : 201;
 
     return new Response(
-      JSON.stringify(data),
+      JSON.stringify({ ...data, email_status: emailStatus }),
       { status: statusCode, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (err: unknown) {

@@ -16,6 +16,7 @@ import { saveDemoRegistration, getDemoRegistrations } from './referral';
 import { computeDashboardMetrics, DEMO_REGISTRATIONS } from '../data/demoData';
 import { getSupabaseClient, isSupabaseConfigured } from './supabase';
 import { trackEvent } from './analytics';
+import type { EmailDeliveryStatus } from './email';
 
 export interface RegistrationResult {
   success: boolean;
@@ -24,6 +25,8 @@ export interface RegistrationResult {
   alreadyRegistered?: boolean;
   error?: string;
   isDemo?: boolean;
+  emailStatus?: EmailDeliveryStatus;
+  emailMessage?: string;
 }
 
 export interface CampaignExpense {
@@ -37,6 +40,7 @@ export interface CampaignExpense {
 /**
  * Registers a student for the free online workshop.
  * Uses atomic Supabase RPC if configured, otherwise falls back to local session.
+ * Coordinates server-side idempotent confirmation email delivery upon confirmed database persistence.
  */
 export async function registerForWorkshop(
   reg: Omit<Registration, 'id' | 'registeredAt'> & { id?: string }
@@ -66,10 +70,11 @@ export async function registerForWorkshop(
 
       const isExisting = Boolean(data?.already_registered);
       const assignedRefCode = data?.referral_code ?? reg.referralCode ?? 'AIPP-2026';
+      const registrationId = data?.registration_id;
 
       // Also store in session cache for offline tab continuity
       saveDemoRegistration({
-        id: data?.registration_id ?? `reg-${Date.now()}`,
+        id: registrationId ?? `reg-${Date.now()}`,
         name: reg.name,
         email: reg.email,
         college: reg.college,
@@ -80,12 +85,53 @@ export async function registerForWorkshop(
         source: reg.source,
       });
 
+      // 1b. Server-Side Confirmation Email Dispatch (Idempotent & Resilient)
+      let emailStatus: EmailDeliveryStatus = 'unconfigured';
+      let emailMessage = 'Confirmation email pending server configuration.';
+
+      if (isExisting) {
+        emailStatus = 'skipped_duplicate';
+        emailMessage = 'Existing registration detected; duplicate confirmation email skipped.';
+      } else if (registrationId) {
+        try {
+          const { data: emailData, error: emailErr } = await supabase.functions.invoke(
+            'send-confirmation-email',
+            {
+              body: {
+                registrationId,
+                name: reg.name,
+                email: reg.email,
+                college: reg.college,
+                graduationYear: reg.graduationYear,
+                projectId: reg.projectId ?? 'resume-feedback',
+                alreadyRegistered: false,
+              },
+            }
+          );
+
+          if (!emailErr && emailData) {
+            emailStatus = (emailData.emailStatus as EmailDeliveryStatus) || 'sent';
+            emailMessage = emailData.message || 'Confirmation email dispatched.';
+          } else {
+            // Function may be unconfigured or pending cloud deployment
+            emailStatus = 'unconfigured';
+            emailMessage = 'Email provider credentials not configured on server. Registration confirmed.';
+          }
+        } catch {
+          // Fallback: registration remains 100% saved in database
+          emailStatus = 'pending';
+          emailMessage = 'Confirmation email dispatch pending. Registration confirmed.';
+        }
+      }
+
       return {
         success: true,
-        registrationId: data?.registration_id,
+        registrationId,
         referralCode: assignedRefCode,
         alreadyRegistered: isExisting,
         isDemo: false,
+        emailStatus,
+        emailMessage,
       };
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Connection to database failed.';
@@ -129,6 +175,8 @@ export async function registerForWorkshop(
     referralCode: code,
     alreadyRegistered: Boolean(duplicate),
     isDemo: true,
+    emailStatus: 'unconfigured',
+    emailMessage: 'Running in session demo mode. No central email dispatched.',
   };
 }
 

@@ -91,6 +91,8 @@ const RegistrationPage: React.FC = () => {
           },
           alreadyRegistered: result.alreadyRegistered,
           isDemo: result.isDemo,
+          emailStatus: result.emailStatus,
+          emailMessage: result.emailMessage,
         },
       });
     } else {

@@ -53,13 +53,15 @@ const Nav: React.FC = () => {
           </a>
           <Link
             to="/dashboard"
-            className={`text-xs font-mono px-2.5 py-1 rounded border transition-colors ${
+            className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cerulean/50 ${
               location.pathname === '/dashboard'
-                ? 'border-cerulean text-cerulean bg-cerulean/10'
-                : 'border-border text-text-tertiary hover:text-text-secondary hover:border-border-hover'
+                ? 'border-cerulean text-white bg-cerulean/20 font-semibold ring-1 ring-cerulean/50'
+                : 'border-border-hover/80 bg-surface-elevated/90 text-white hover:border-cerulean hover:bg-cerulean/15 hover:text-white shadow-sm'
             }`}
+            aria-label="Organizer Dashboard"
           >
-            Dashboard
+            <span className="w-1.5 h-1.5 rounded-full bg-cerulean" aria-hidden="true" />
+            <span>Dashboard</span>
           </Link>
         </nav>
 
@@ -132,9 +134,19 @@ const Nav: React.FC = () => {
             <Link
               to="/dashboard"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm font-mono text-cerulean py-1"
+              className={`flex items-center justify-between text-sm font-medium px-3.5 py-2.5 rounded-lg border transition-all ${
+                location.pathname === '/dashboard'
+                  ? 'border-cerulean text-white bg-cerulean/20 font-semibold'
+                  : 'border-border-hover/80 bg-surface-elevated text-white hover:border-cerulean hover:bg-cerulean/10'
+              }`}
             >
-              Dashboard (Admin)
+              <span className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-cerulean" />
+                <span>Organizer Dashboard</span>
+              </span>
+              <span className="text-2xs font-mono text-cerulean px-2 py-0.5 rounded bg-cerulean/15 border border-cerulean/30">
+                Admin
+              </span>
             </Link>
           </div>
           <div className="pt-3 border-t border-border">
