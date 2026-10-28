@@ -159,40 +159,37 @@ describe('Registration Confirmation Email & Idempotency Audit', () => {
   });
 });
 
-describe('Dashboard Navigation Button Visibility & Accessibility', () => {
+describe('Top Navigation Structure & Growth Links Audit', () => {
   const rootDir = path.resolve(import.meta.dirname, '..');
   const navPath = path.join(rootDir, 'src', 'components', 'Nav.tsx');
 
-  it('verifies desktop and mobile Dashboard buttons have high contrast and clear visibility', () => {
+  it('verifies all specified navigation links exist with correct routes and consistent styling', () => {
     assert.ok(fs.existsSync(navPath), 'Nav.tsx must exist');
     const navCode = fs.readFileSync(navPath, 'utf8');
 
-    // Desktop button checks
+    // Specified navigation items from requirement 2
+    assert.ok(navCode.includes('Workshop'), 'Must include Workshop link');
+    assert.ok(navCode.includes('Build a Project'), 'Must include Build a Project link');
+    assert.ok(navCode.includes('/finder'), 'Build a Project must point to /finder');
+    assert.ok(navCode.includes('Campus Leaderboard'), 'Must include Campus Leaderboard link');
+    assert.ok(navCode.includes('/leaderboard'), 'Campus Leaderboard must point to /leaderboard');
+    assert.ok(navCode.includes('Growth Hub'), 'Must include Growth Hub link');
+    assert.ok(navCode.includes('/growth-hub'), 'Growth Hub must point to /growth-hub');
+    assert.ok(navCode.includes('Register Now (Free)'), 'Must include prominent Register Now button');
+    assert.ok(navCode.includes('/register'), 'Register Now must point to /register');
+
+    // Consistent typography & styling
+    assert.ok(navCode.includes('text-sm font-medium'), 'Must use consistent text-sm font-medium styling');
+    assert.ok(navCode.includes('bg-black/85 backdrop-blur-md'), 'Must use dark translucent background with blur');
+
+    // Accessible Organizer Dashboard in drawer / organizer access
     assert.ok(
-      navCode.includes('text-white'),
-      'Dashboard button must have crisp white text contrast against black'
-    );
-    assert.ok(
-      navCode.includes('bg-surface-elevated') || navCode.includes('bg-cerulean'),
-      'Dashboard button must have elevated background'
-    );
-    assert.ok(
-      navCode.includes('hover:border-cerulean'),
-      'Dashboard button must have responsive hover border state'
+      navCode.includes('Organizer Dashboard'),
+      'Menu must clearly identify Organizer Dashboard'
     );
     assert.ok(
       navCode.includes('aria-label="Organizer Dashboard"'),
       'Dashboard button must have accessibility label'
-    );
-
-    // Mobile button checks
-    assert.ok(
-      navCode.includes('Organizer Dashboard'),
-      'Mobile menu must clearly identify the Organizer Dashboard'
-    );
-    assert.ok(
-      navCode.includes('bg-cerulean') && navCode.includes('rounded-full'),
-      'Dashboard indicator dot must be present for visual grounding'
     );
   });
 });

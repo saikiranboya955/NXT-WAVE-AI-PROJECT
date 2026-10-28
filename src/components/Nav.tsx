@@ -22,57 +22,53 @@ const Nav: React.FC = () => {
         </Link>
 
         {/* Center Nav Links (Desktop) */}
-        <nav className="hidden md:flex items-center gap-8" aria-label="Main Navigation">
+        <nav className="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Main Navigation">
           <a
             href={isHome ? '#why' : '/#why'}
-            className="text-sm font-medium text-text-secondary hover:text-white transition-colors"
+            className="text-sm font-medium text-text-secondary hover:text-white px-3 py-1.5 rounded-lg transition-colors hover:bg-white/[0.04]"
           >
-            Why
+            Workshop
           </a>
           <Link
             to="/finder"
-            className={`text-sm font-medium transition-colors ${
+            className={`text-sm font-medium px-3 py-1.5 rounded-lg transition-colors ${
               location.pathname === '/finder'
-                ? 'text-white'
-                : 'text-text-secondary hover:text-white'
+                ? 'text-white font-semibold bg-white/[0.08] border border-cerulean/40 shadow-sm'
+                : 'text-text-secondary hover:text-white hover:bg-white/[0.04]'
             }`}
           >
-            What You'll Build
+            Build a Project
           </Link>
-          <a
-            href={isHome ? '#community' : '/#community'}
-            className="text-sm font-medium text-text-secondary hover:text-white transition-colors"
-          >
-            Community
-          </a>
-          <a
-            href={isHome ? '#faq' : '/#faq'}
-            className="text-sm font-medium text-text-secondary hover:text-white transition-colors"
-          >
-            FAQ
-          </a>
           <Link
-            to="/dashboard"
-            className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cerulean/50 ${
-              location.pathname === '/dashboard'
-                ? 'border-cerulean text-white bg-cerulean/20 font-semibold ring-1 ring-cerulean/50'
-                : 'border-border-hover/80 bg-surface-elevated/90 text-white hover:border-cerulean hover:bg-cerulean/15 hover:text-white shadow-sm'
+            to="/leaderboard"
+            className={`text-sm font-medium px-3 py-1.5 rounded-lg transition-colors ${
+              location.pathname === '/leaderboard'
+                ? 'text-white font-semibold bg-white/[0.08] border border-cerulean/40 shadow-sm'
+                : 'text-text-secondary hover:text-white hover:bg-white/[0.04]'
             }`}
-            aria-label="Organizer Dashboard"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-cerulean" aria-hidden="true" />
-            <span>Dashboard</span>
+            Campus Leaderboard
+          </Link>
+          <Link
+            to="/growth-hub"
+            className={`text-sm font-medium px-3 py-1.5 rounded-lg transition-colors ${
+              location.pathname === '/growth-hub'
+                ? 'text-white font-semibold bg-white/[0.08] border border-cerulean/40 shadow-sm'
+                : 'text-text-secondary hover:text-white hover:bg-white/[0.04]'
+            }`}
+          >
+            Growth Hub
           </Link>
         </nav>
 
         {/* Right CTA Button (Desktop) */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
           <Link
             to="/register"
-            className="btn-rose !py-2 !px-5 !rounded-full !text-xs font-semibold"
+            className="btn-rose !py-2 !px-5 !rounded-full !text-xs font-semibold shadow-md hover:shadow-rose/25 hover:scale-[1.02] active:scale-[0.98] transition-all"
             id="nav-register-btn"
           >
-            Register Now
+            Register Now (Free)
           </Link>
         </div>
 
@@ -106,38 +102,45 @@ const Nav: React.FC = () => {
             <a
               href={isHome ? '#why' : '/#why'}
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm font-medium text-text-secondary hover:text-white py-1"
+              className="text-sm font-medium text-text-secondary hover:text-white py-1.5 transition-colors"
             >
-              Why
+              Workshop
             </a>
             <Link
               to="/finder"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm font-medium text-text-secondary hover:text-white py-1"
+              className={`text-sm font-medium py-1.5 transition-colors ${
+                location.pathname === '/finder' ? 'text-cerulean font-semibold' : 'text-text-secondary hover:text-white'
+              }`}
             >
-              What You'll Build
+              Build a Project
             </Link>
-            <a
-              href={isHome ? '#community' : '/#community'}
+            <Link
+              to="/leaderboard"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm font-medium text-text-secondary hover:text-white py-1"
+              className={`text-sm font-medium py-1.5 transition-colors ${
+                location.pathname === '/leaderboard' ? 'text-cerulean font-semibold' : 'text-text-secondary hover:text-white'
+              }`}
             >
-              Community
-            </a>
-            <a
-              href={isHome ? '#faq' : '/#faq'}
+              Campus Leaderboard
+            </Link>
+            <Link
+              to="/growth-hub"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm font-medium text-text-secondary hover:text-white py-1"
+              className={`text-sm font-medium py-1.5 transition-colors ${
+                location.pathname === '/growth-hub' ? 'text-cerulean font-semibold' : 'text-text-secondary hover:text-white'
+              }`}
             >
-              FAQ
-            </a>
+              Growth Hub
+            </Link>
             <Link
               to="/dashboard"
               onClick={() => setMobileMenuOpen(false)}
-              className={`flex items-center justify-between text-sm font-medium px-3.5 py-2.5 rounded-lg border transition-all ${
+              aria-label="Organizer Dashboard"
+              className={`flex items-center justify-between text-xs font-medium px-3.5 py-2.5 rounded-lg border transition-all mt-2 ${
                 location.pathname === '/dashboard'
                   ? 'border-cerulean text-white bg-cerulean/20 font-semibold'
-                  : 'border-border-hover/80 bg-surface-elevated text-white hover:border-cerulean hover:bg-cerulean/10'
+                  : 'border-border-hover/80 bg-surface-elevated text-text-secondary hover:text-white hover:border-cerulean/60'
               }`}
             >
               <span className="flex items-center gap-2">
@@ -153,9 +156,9 @@ const Nav: React.FC = () => {
             <Link
               to="/register"
               onClick={() => setMobileMenuOpen(false)}
-              className="btn-rose w-full text-center !rounded-full !py-2.5 text-xs font-semibold"
+              className="btn-rose w-full text-center !rounded-full !py-2.5 text-xs font-semibold shadow-md"
             >
-              Register Now
+              Register Now (Free)
             </Link>
           </div>
         </div>

@@ -252,6 +252,17 @@ const SuccessPage: React.FC = () => {
           </ul>
         </div>
 
+        {/* Campus Leaderboard Action */}
+        <div className="mb-6">
+          <Link
+            to="/leaderboard"
+            className="btn-primary w-full !py-3 text-xs font-semibold flex items-center justify-center gap-2"
+          >
+            <span>🏆</span>
+            <span>Check Campus Leaderboard Rankings</span>
+          </Link>
+        </div>
+
         {/* Return to Home */}
         <div className="text-center">
           <Link
