@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base Styles ───────────────────────────────────────────────────────────── */
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #000000;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply bg-black text-white font-sans;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgba(255, 45, 149, 0.35);
+    color: #FFFFFF;
+  }
+
+  :focus-visible {
+    outline: 2px solid #FF2D95;
+    outline-offset: 3px;
+  }
+}
+
+/* ─── Components ────────────────────────────────────────────────────────────── */
+
+@layer components {
+
+  /* Primary Neon Rose Button */
+  .btn-rose {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           bg-rose hover:bg-rose-light text-white text-sm font-semibold
+           rounded-xl
+           active:scale-[0.98] transition-all duration-150;
+  }
+
+  /* Cerulean Blue Button */
+  .btn-cerulean {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           bg-cerulean hover:bg-cerulean-light text-white text-sm font-semibold
+           rounded-xl
+           active:scale-[0.98] transition-all duration-150;
+  }
+
+  /* Accent Action Button */
+  .btn-gradient {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5
+           bg-rose hover:bg-rose-light text-white text-sm font-semibold
+           rounded-xl
+           active:scale-[0.98] transition-all duration-150;
+  }
+
+  /* Ghost / Outlined Button */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5
+           bg-surface border border-border text-text-secondary text-sm font-medium
+           rounded-xl hover:border-border-hover hover:text-white
+           transition-all duration-150;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-surface border border-border rounded-2xl;
+  }
+  .card-elevated {
+    @apply bg-surface-elevated border border-border rounded-2xl;
+  }
+
+  /* Input fields */
+  .input-field {
+    @apply w-full bg-surface-elevated border border-border rounded-xl px-4 py-3
+           text-sm text-white placeholder-text-tertiary
+           focus:border-cerulean focus:outline-none focus:ring-1 focus:ring-cerulean
+           transition-all duration-150;
+  }
+  .input-field.error {
+    @apply border-rose focus:ring-rose;
+  }
+
+  /* Badges */
+  .badge-demo {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5
+           bg-rose/10 border border-rose/30 rounded-full
+           text-rose text-2xs font-mono font-medium;
+  }
+  .badge-cerulean {
+    @apply inline-flex items-center gap-1.5 px-3 py-1
+           bg-cerulean/15 border border-cerulean/30 rounded-full
+           text-cerulean text-xs font-medium;
+  }
+  .badge-rose {
+    @apply inline-flex items-center gap-1.5 px-3 py-1
+           bg-rose/15 border border-rose/30 rounded-full
+           text-rose text-xs font-medium;
+  }
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E1E1E;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}

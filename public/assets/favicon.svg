@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="nxtBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0092C7"/>
+      <stop offset="100%" stop-color="#007BA7"/>
+    </linearGradient>
+  </defs>
+  <!-- Background rounded tile -->
+  <rect width="64" height="64" rx="14" fill="#0A0A0A" stroke="#1E1E1E" stroke-width="1.5"/>
+  <!-- Scaled NxtWave Brand Mark -->
+  <g transform="translate(5, 18) scale(0.36)">
+    <path d="M 136,64 L 137,72 L 138,69 L 139,71 L 141,72 L 142,69 L 143,72 L 145,71 L 142,65 L 140,69 L 139,67 L 138,66 L 138,64 Z" fill="#FFFFFF"/>
+    <path d="M 128,65 L 130,66 L 131,72 L 132,65 L 134,64 Z" fill="#FFFFFF"/>
+    <path d="M 100,43 L 97,45 L 97,47 L 96,48 L 96,67 L 98,71 L 100,72 L 117,72 L 120,69 L 120,46 L 118,44 L 116,43 Z" fill="#FFFFFF"/>
+    <path d="M 103,48 L 115,49 L 114,52 L 107,55 L 114,56 L 115,58 L 106,60 L 107,63 L 115,64 L 114,67 L 102,66 Z" fill="#0A0A0A"/>
+    <path d="M 66,43 L 66,45 L 67,48 L 70,53 L 71,58 L 74,63 L 75,68 L 77,72 L 82,71 L 83,69 L 84,67 L 85,62 L 88,57 L 89,52 L 92,47 L 92,45 L 93,43 L 86,44 L 85,46 L 84,48 L 82,56 L 81,58 L 79,60 L 76,54 L 75,49 L 73,46 L 72,43 Z" fill="#FFFFFF"/>
+    <path d="M 53,43 L 52,45 L 49,52 L 44,64 L 42,69 L 41,72 L 48,72 L 49,70 L 50,67 L 60,67 L 62,69 L 63,72 L 69,72 L 69,70 L 66,64 L 62,55 L 61,50 L 59,46 L 58,44 Z" fill="#FFFFFF"/>
+    <path d="M 55,54 L 57,56 L 58,58 L 57,61 L 52,60 L 53,57 L 54,56 Z" fill="#0A0A0A"/>
+    <path d="M 41,39 L 38,42 L 37,42 L 33,46 L 36,48 L 34,53 L 34,58 L 33,60 L 30,62 L 28,60 L 27,57 L 27,55 L 26,52 L 25,50 L 21,50 L 19,52 L 18,58 L 17,60 L 14,62 L 12,60 L 12,57 L 11,55 L 5,54 L 5,56 L 6,59 L 8,65 L 10,68 L 11,71 L 13,72 L 15,72 L 17,71 L 18,69 L 19,64 L 21,59 L 23,57 L 24,59 L 25,60 L 25,63 L 26,66 L 28,70 L 30,72 L 33,72 L 35,70 L 36,68 L 37,65 L 38,62 L 40,52 L 45,49 L 43,45 Z" fill="#FFFFFF"/>
+    <path d="M 48,21 L 46,25 L 47,27 L 51,33 L 58,33 L 57,30 L 54,27 L 51,21 Z" fill="url(#nxtBlue)"/>
+    <path d="M 61,5 L 61,10 L 69,11 L 69,33 L 75,33 L 76,10 L 84,10 L 83,4 Z" fill="url(#nxtBlue)"/>
+    <path d="M 52,4 L 50,6 L 49,9 L 47,11 L 46,13 L 47,15 L 48,17 L 51,17 L 58,6 L 58,4 L 54,5 Z" fill="url(#nxtBlue)"/>
+    <path d="M 31,4 L 31,6 L 33,9 L 37,14 L 40,19 L 37,24 L 34,27 L 33,30 L 31,33 L 39,32 L 44,24 L 46,21 L 47,19 L 46,17 L 44,14 L 40,9 L 39,6 L 37,4 Z" fill="url(#nxtBlue)"/>
+    <path d="M 4,5 L 4,33 L 10,33 L 11,16 L 14,20 L 21,33 L 28,33 L 27,4 L 22,5 L 21,21 L 19,19 L 16,14 L 12,6 L 10,4 Z" fill="url(#nxtBlue)"/>
+  </g>
+</svg>
